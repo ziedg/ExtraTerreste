@@ -20,9 +20,22 @@ export default class Friends extends Component {
         })
     }
 
-
+     getRandom(arr, n) {
+        var result = new Array(n),
+            len = arr.length,
+            taken = new Array(len);
+        
+        while (n--) {
+            var x = Math.floor(Math.random() * len);
+            result[n] = arr[x in taken ? taken[x] : x];
+            taken[x] = --len in taken ? taken[len] : len;
+        }
+        return result;
+    }
     renderList = ()=>{
-        return this.state.users.map((user)=>{
+
+         let randomUsers = this.getRandom(this.state.users,3)
+        return randomUsers.map((user)=>{
 
             if(!user) return null;
              return <li  className="list-group-item"> 
