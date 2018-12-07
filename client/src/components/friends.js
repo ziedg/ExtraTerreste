@@ -9,7 +9,8 @@ export default class Friends extends Component {
 
 
     state={
-        users:[]
+        users:[],
+          isFriend:[]
     }
 
     componentDidMount(){
@@ -32,6 +33,13 @@ export default class Friends extends Component {
         }
         return result;
     }
+
+
+
+    handlefriend= (e)=>{
+        
+       
+    }
     renderList = ()=>{
 
          let randomUsers = this.getRandom(this.state.users,3)
@@ -40,7 +48,15 @@ export default class Friends extends Component {
             if(!user) return null;
              return <li  className="list-group-item"> 
                       { user.login}- {user.familly}
-                <i class="  m-3 p-3 fa fa-address-book-o text-primary" aria-hidden="true"> add friend</i>
+                <i class="  m-3 p-3 fa fa-address-book-o text-primary" aria-hidden="true"  
+                style={{cursor:'pointer'}}
+                onClick= { ()=>this.handlefriend(user)}
+                
+                
+                >
+                  Add friend
+                
+                </i>
              </li>
         })
     }
@@ -48,6 +64,7 @@ export default class Friends extends Component {
     return (
       <div>
 
+<h3  className='text-info'> Propostions</h3>
        <ul class="list-group">
      {this.renderList()}
 </ul>

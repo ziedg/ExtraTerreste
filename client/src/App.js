@@ -7,6 +7,7 @@ import { BrowserRouter as Router , Route, Link } from 'react-router-dom'
 import './App.css';
 
 import Home from './components/home';
+import EditProfile from './components/EditProfile';
 
 
 
@@ -21,6 +22,7 @@ render() {
 
        <Route path='/'   exact component={Main} />
      <Route path='/home' component={Home} />
+     <Route path='/edit-profile' component={EditProfile} />
      </div>
      
    </Router>)

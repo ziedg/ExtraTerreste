@@ -12,12 +12,12 @@ export default (props) => {
             <input   onChange={props.onAgeChange}    placeholder='Age (Optional) '  className=' p-2 m-2 form-control' />
       <input    onChange={props.onFamilleChange}    placeholder='Famille  (Optional)' className= 'p-2 m-2 form-control' />
 
-      <button className="btn-primary btn btn-block"   onClick= {props.onSubmit} > Inscrire</button>
+      <button className="btn-outline-primary btn "   onClick= {props.onSubmit} > Inscrire</button>
 
       <h3 className='text-muted' > OR  </h3>
 
 
-      <button className='btn btn-success  btn-block'  onClick={props.onLogin}  >  Login </button>
+      <button className='btn btn-outline-success '  onClick={props.onLogin}  >  Login </button>
 
       {props.error!==''?<div className="alert alert-danger m-3 p-3" > {props.error} </div>:null}
     </div>
