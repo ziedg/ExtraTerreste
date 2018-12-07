@@ -35,35 +35,75 @@ onLogout = ()=>{
       <div>
 
 
-<div className='row'>
-<div className='col-md-9'>
-<h1  className='ml-5'>   Welcome   { this.state.user.login}</h1>  
-</div>
-<div className='col'>
-<button className='btn  btn-outline-danger'  onClick={this.onLogout}> Logout </button>
-</div>
-</div>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  
+  <a class="navbar-brand" href="#">
+  
+  <img src= {require("../assets/images.jpeg")}  style={{width:30,height:30}} className="rounded" alt="n"/>  Welcome   { this.state.user.login} 
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+     
+     
+
+  
+      <li class="nav-item">
+      <a className=' m-2 p-2 btn  btn-outline-danger nav-link" href="#" '  onClick={this.onLogout}> Logout </a>
+      </li>
+      <li class="nav-item"
+      
+      >
+                <a  className=' m-2 p-2  btn btn-outline-warning nav-link" href="#"'  onClick={this.onEdit} >    Modifier Profile </a>
+
+      </li>
+
+
+     
+  
+    </ul>
+   
+  </div>
+</nav>
+
+    
+     
+
+  
+
+   
+
+
+
+
+
+
+
+
         
          
 
 
-      <button  className='m-5 btn btn-outline-warning'  onClick={this.onEdit} >    Modifier Profile </button>
+     
 
-<div className='row'>
 
 
 
    
 
-      <div className='col-md-3'>
+    
       <Friends />
-      </div>
-      </div>
+
+</div>
 
    
 
         
-      </div>
+
     )
   }
 }

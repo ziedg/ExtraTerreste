@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Background from './assets/images.jpeg';
 import  Main from  './components/main';
 
 import { BrowserRouter as Router , Route, Link } from 'react-router-dom'
@@ -18,7 +19,7 @@ render() {
     return (
     
    <Router>
-     <div>
+     <div  style={{ backgroundImage: "url(" + { Background } + ")"}}>
 
        <Route path='/'   exact component={Main} />
      <Route path='/home' component={Home} />

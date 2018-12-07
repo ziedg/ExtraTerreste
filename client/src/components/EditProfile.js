@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import {withRouter} from 'react-router-dom';
 
-export default class EditProfile extends Component {
+
+ class EditProfile extends Component {
 
   state={  login:'',
   password:'',
@@ -11,9 +13,18 @@ export default class EditProfile extends Component {
 
   }
 
+  nextPath(path) {
+    this.props.history.push(path);
+  }
+
 
   handleChanges= ()=>{
     console.log(this.state)
+  }
+
+  returnHome = ()=>{
+      this.nextPath('/home')
+
   }
 
 
@@ -83,7 +94,7 @@ export default class EditProfile extends Component {
 
 
  <button className='btn btn-outline-success p-2 m-2'  onClick={this.handleChanges}> submit  </button>
- <button className='btn btn-outline-danger  p-2 m-2'  onClick={this.handleChanges}> cancel  </button>
+ <button className='btn btn-outline-danger  p-2 m-2'  onClick={this.returnHome}> cancel  </button>
  </div>
       
 
@@ -92,3 +103,4 @@ export default class EditProfile extends Component {
     )
   }
 }
+export default withRouter(EditProfile);
