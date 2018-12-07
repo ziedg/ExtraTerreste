@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-
-export default class Home extends Component {
+import {withRouter} from 'react-router-dom';
+class Home extends Component {
 
 
   state={user:{},
@@ -11,6 +11,10 @@ export default class Home extends Component {
   race:'',
   noriture:''
 
+  }
+
+  nextPath(path) {
+    this.props.history.push(path);
   }
 componentDidMount(){
   const user = JSON.parse(localStorage.getItem('user'))
@@ -23,11 +27,27 @@ componentDidMount(){
 handleChanges= ()=>{
   console.log(this.state)
 }
+
+onLogout = ()=>{
+     localStorage.removeItem('token');
+     this.nextPath('/');
+     
+}
   render() {
     return (
       <div>
 
-        <h1>   Welcome   { this.state.user.login}</h1>
+
+<div className='row'>
+<div className='col'>
+<h1  className='ml-5'>   Welcome   { this.state.user.login}</h1>  
+</div>
+<div className='col'>
+<button className='btn  btn-danger'  onClick={this.onLogout}> Logout </button>
+</div>
+</div>
+        
+         
 
 
       <h2  className='m-5 text-danger'  >    Modifier Profile </h2>
@@ -124,3 +144,4 @@ handleChanges= ()=>{
     )
   }
 }
+export default withRouter(Home);

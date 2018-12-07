@@ -11,12 +11,14 @@ class Main extends Component {
 
 
   state = {
+    
     login:'',
     pasword:'',
     age:0,
     famille:'',
     race:'',
-    norriture:''
+    norriture:'',
+    error:''
 
   }
 
@@ -46,10 +48,41 @@ class Main extends Component {
      axios.post('http://localhost:4000/inscrire',{login,password,age,famille
 
      }).then((res)=>{
+
+      const {token} = res.data;
+      localStorage.setItem('token',token);
+
      localStorage.setItem('user',JSON.stringify(this.state))
    this.nextPath('/home')
      })
   }
+
+
+  onLogin = ()=>{
+    const token = localStorage.getItem('token');
+    console.log(token);
+    axios.post('http://localhost:4000/login','',{headers: {"x-access-token":  token } }).then((res)=>{
+      if(res.data){
+        this.nextPath('/home')
+      }
+      else
+      {
+      
+        this.setState({error:"Inscriez vous ?? "})
+        
+
+        
+      }
+
+ 
+    }
+    )
+  .catch(()=>{
+    this.setState({error:"Inscriez vous ?? "})
+  })
+  }
+
+  
      
 
 
@@ -63,6 +96,8 @@ class Main extends Component {
       onLoginChange={this.onLoginChange}
       onFamilleChange={this.onFamilleChange}
        onAgeChange={this.onAgeChange}   
+       onLogin={this.onLogin}
+       error={this.state.error}
          />
          </div>)
   

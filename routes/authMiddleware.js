@@ -1,4 +1,9 @@
+
+
+    const jwt = require('jsonwebtoken');
 function authMiddleware(req, res, next) {
+
+
     var token = req.headers["x-access-token"];
     if (!token)
       return res.status(401).send({
@@ -11,7 +16,7 @@ function authMiddleware(req, res, next) {
           auth: false,
           message: "Failed to authenticate token."
         });
-      req._token = decoded;
+      req.user = decoded;
 
       console.log(decoded)
       

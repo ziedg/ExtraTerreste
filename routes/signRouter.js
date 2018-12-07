@@ -20,21 +20,30 @@ app.post('/inscrire', async (req,res)=>{
     res.send({
       ok:"user Created",
       token
-    });
+    })});
 
 
-    app.post('/disconnect'),async (req,res)=>{
-
-       const user = await  User.d
-
-    }
+  
 
 
 
+  
+
+    app.post('/login',auth,async (req,res)=>{
+      const user = req.user;
+
+      if(user)    res.send({ok:"login"})
+      
+    })
 
 
 
-})
+
+
+
+
+
+
 
 
 
