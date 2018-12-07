@@ -66,7 +66,10 @@ class Main extends Component {
   onLogin = ()=>{
 
     const {login,password} = this.state;
+   
     axios.post('http://localhost:4000/login',{login,password}).then((res)=>{
+      const {token} = res.data;
+      localStorage.setItem('token',token);
       if(res.data){
         this.nextPath('/home')
       }

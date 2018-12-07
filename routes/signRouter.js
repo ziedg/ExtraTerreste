@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-const auth = require('./authMiddleware');
+
 
 module.exports = (app) => {
 
@@ -31,7 +31,7 @@ module.exports = (app) => {
       }
       const user = new User(extra);
       await user.save()
-      var token = jwt.sign(extra, "mytestserver");
+      var token = jwt.sign({login,password}, "mytestserver");
       res.send({
           ok: "user Created",
           token
@@ -67,9 +67,10 @@ module.exports = (app) => {
       password
     })
 
-    console.log(user)
+    var token = jwt.sign({login,password}, "mytestserver");
 
     if (user) res.send({
+      token,
       ok: "login"
     })
 
@@ -84,20 +85,6 @@ module.exports = (app) => {
 
 
 
-  app.get('/users', auth, async (req,res)=>{
-
-actualUser = req.user;
-
-const users = await User.find({});
-
-  const newusers = users.map((user =>{
-    const {login,famille} = user;
-    if(user.login !== actualUser.login)
-    return {login,famille}
-  }))
-
-  res.send(newusers);
-  })
 
 
 

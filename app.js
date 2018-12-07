@@ -38,13 +38,11 @@ app.use((req,res,next)=>{
 })
 
 
-const jwtMW = exjwt({
-    secret: 'mysecret'
-});
 
 //routes
 
 require('./routes/signRouter')(app);
+require('./routes/mainRouter')(app);
 
 
 
