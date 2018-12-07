@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom';
+import Friends from './friends';
 class Home extends Component {
 
 
@@ -39,7 +40,7 @@ onLogout = ()=>{
 
 
 <div className='row'>
-<div className='col'>
+<div className='col-md-9'>
 <h1  className='ml-5'>   Welcome   { this.state.user.login}</h1>  
 </div>
 <div className='col'>
@@ -52,6 +53,8 @@ onLogout = ()=>{
 
       <h2  className='m-5 text-danger'  >    Modifier Profile </h2>
 
+<div className='row'>
+<div className='col'>
 <div className='container'>
 
  <div className='row '>
@@ -138,6 +141,14 @@ onLogout = ()=>{
  <button className='btn btn-danger'  onClick={this.handleChanges}> cancel  </button>
  </div>
       
+      </div>
+
+      <div className='col-md-3'>
+      <Friends />
+      </div>
+      </div>
+
+   
 
         
       </div>
