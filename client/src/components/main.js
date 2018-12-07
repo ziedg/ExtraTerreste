@@ -49,7 +49,12 @@ class Main extends Component {
 
      }).then((res)=>{
 
+
       const {token} = res.data;
+      if(res.data.ko){
+         return  this.setState({error:"compte Deja existe ?? "})
+      }
+  
       localStorage.setItem('token',token);
 
      localStorage.setItem('user',JSON.stringify(this.state))
@@ -59,9 +64,9 @@ class Main extends Component {
 
 
   onLogin = ()=>{
-    const token = localStorage.getItem('token');
-    console.log(token);
-    axios.post('http://localhost:4000/login','',{headers: {"x-access-token":  token } }).then((res)=>{
+
+    const {login,password} = this.state;
+    axios.post('http://localhost:4000/login',{login,password}).then((res)=>{
       if(res.data){
         this.nextPath('/home')
       }

@@ -10,9 +10,15 @@ module.exports = (app)=>{
 
 app.post('/inscrire', async (req,res)=>{
 
+
+
+
   const {login,password,age,famille} = req.body;
 
+ const  extraUser = await  User.findOne({login})
 
+if(! extraUser)
+{
   const extra = {login,password,age,famille}
   const user = new User(extra);
     await user.save()
@@ -20,7 +26,19 @@ app.post('/inscrire', async (req,res)=>{
     res.send({
       ok:"user Created",
       token
-    })});
+    }
+    
+    )
+  }
+  else
+  {
+    res.send({
+      ko:"user exist"
+    }
+  
+  );
+
+  }})
 
 
   
@@ -29,11 +47,16 @@ app.post('/inscrire', async (req,res)=>{
 
   
 
-    app.post('/login',auth,async (req,res)=>{
-      const user = req.user;
+    app.post('/login',async (req,res)=>{
+     
+      const {login,password}= req.body;
+      
+      const user = await User.findOne({login,password})
+
+      console.log(user)
 
       if(user)    res.send({ok:"login"})
-      
+
     })
 
 
