@@ -45,8 +45,13 @@ class Main extends Component {
   onSubmit = ()=>{
       
 
-    const {login,password,age,famille} = this.state;
-     axios.post('http://localhost:4000/inscrire',{login,password,age,famille
+    const {login,password} = this.state;
+
+    if( login ==='' | password===''){
+      this.setState({error:"Login or password shouldn't be empty ??"})
+    }
+
+     axios.post('http://localhost:4000/inscrire',{login,password
 
      }).then((res)=>{
 
