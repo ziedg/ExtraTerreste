@@ -40,7 +40,7 @@ app.get('/getfriends',auth,async (req,res)=>{
               
 
        }))
-      console.log(users)
+      res.send(users)
 
       
    
