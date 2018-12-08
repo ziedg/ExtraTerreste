@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom';
+import axios from'axios';
 
 
  class EditProfile extends Component {
 
-  state={  login:'',
+  state={ 
+    users:[],  
+    login:'',
   password:'',
   age:0,
   familly:'',
@@ -13,13 +16,26 @@ import {withRouter} from 'react-router-dom';
 
   }
 
+
+  componentDidMount(){
+    const user = JSON.parse(localStorage.getItem('user'))
+    this.setState({user,login:user.login,age:user.age,familly:user.famille,password:user.password})
+  
+    
+  }
+
   nextPath(path) {
     this.props.history.push(path);
   }
 
 
   handleChanges= ()=>{
-    console.log(this.state)
+    const token = localStorage.getItem('token');
+    axios.post('http://localhost:4000/edit',this.state,{headers:{'x-access-token':token}}).then((res)=>{
+        console.log(res.data);
+        localStorage.setItem('user',JSON.stringify(this.state))
+             
+    })
   }
 
   returnHome = ()=>{
@@ -93,8 +109,8 @@ import {withRouter} from 'react-router-dom';
   
 
 
- <button className='btn btn-outline-success p-2 m-2'  onClick={this.handleChanges}> submit  </button>
- <button className='btn btn-outline-danger  p-2 m-2'  onClick={this.returnHome}> cancel  </button>
+ <button className='btn btn-outline-success p-2 m-2'  onClick={this.handleChanges}> Edit </button>
+ <button className='btn btn-outline-danger  p-2 m-2'  onClick={this.returnHome}> Cancel  </button>
  </div>
       
 

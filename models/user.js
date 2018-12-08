@@ -9,7 +9,8 @@ const UserSchema= new Schema({
     age:Number,
     famille:String,
     race:String,
-    norriture:String
+    norriture:String,
+    friends : [],
 })
 
 

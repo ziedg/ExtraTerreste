@@ -1,75 +1,138 @@
-import React, { Component } from 'react'
+import React, {
+    Component
+} from 'react'
 
 import axios from 'axios';
 
-import {withRouter} from 'react-router-dom';
-import { access } from 'fs';
+import {
+    withRouter
+} from 'react-router-dom';
+
 
 export default class Friends extends Component {
 
 
-    state={
-        users:[],
-          isFriend:[]
+    state = {
+        users: [],
+
     }
 
-    componentDidMount(){
-  const token = localStorage.getItem('token');
-        axios.get('http://localhost:4000/users',{headers:{'x-access-token':token}}).then((res)=>{
-            const   users = res.data;
-            this.setState({users})
+    componentDidMount() {
+        const token = localStorage.getItem('token');
+        axios.get('http://localhost:4000/users', {
+            headers: {
+                'x-access-token': token
+            }
+        }).then((res) => {
+            let users = res.data;
+
+            if (users) {
+
+                users = users.map(user => {
+
+                    if (user)
+
+                    {
+                        user['amie'] = false
+
+                        if (user.login)
+                            return {
+                                ...user
+                            }
+                    }
+                })
+
+
+            }
+
+
+            this.setState({
+                users
+            })
         })
     }
 
-     getRandom(arr, n) {
-        var result = new Array(n),
-            len = arr.length,
-            taken = new Array(len);
-        
-        while (n--) {
-            var x = Math.floor(Math.random() * len);
-            result[n] = arr[x in taken ? taken[x] : x];
-            taken[x] = --len in taken ? taken[len] : len;
-        }
-        return result;
+
+
+
+
+    handlefriend = (e, user) => {
+        console.log(e.target)
+
+
+        let users = this.state.users.filter((u) => {
+            if( u && user)
+                      return u.login !== user.login
+        })
+
+
+
+        this.setState(prev => {
+            return {
+                users
+            }
+        })
+        const token = localStorage.getItem('token');
+        if (user) user['amie'] = true
+        axios.post('http://localhost:4000/addFriend ', {login:user.login}, {
+                headers: {
+                    'x-access-token': token
+                }
+            })
+            .then((res) => {
+                console.log(res)
+            })
+
+
+
+
     }
+    renderList = () => {
+
+
+        return this.state.users.map((user) => {
+
+            if (!user) return null;
+            return <li className = "list-group-item" >
+                <span className = "text-danger mx-2 px-2" >
+                 {
+                    user.login
+                } - {
+                    user.famille
+                } </span> 
 
 
 
-    handlefriend= (e)=>{
-        
-       
-    }
-    renderList = ()=>{
 
-         let randomUsers = this.getRandom(this.state.users,3)
-        return randomUsers.map((user)=>{
+                <button className = 'btn btn-outline-info'
+            onClick = {
+                    (e) => this.handlefriend(e, user)
+                } >
 
-            if(!user) return null;
-             return <li  className="list-group-item"> 
-                      { user.login}- {user.familly}
-                <i class="  m-3 p-3 fa fa-address-book-o text-primary" aria-hidden="true"  
-                style={{cursor:'pointer'}}
-                onClick= { ()=>this.handlefriend(user)}
-                
-                
+                <i class = "  fa fa-address-book-o fa text-info" aria  hidden = "true"
+            style = {
+                    {
+                        cursor: 'pointer'
+                    }
+                }
+
+
+
                 >
-                  Add friend
-                
-                </i>
-             </li>
-        })
-    }
-  render() {
-    return (
-      <div>
 
-<h3  className='text-info'> Propostions</h3>
-       <ul class="list-group">
-     {this.renderList()}
-</ul>
-        
-      </div>
-    )
-  }
+
+
+                </i>
+
+            Add </button>   </li>  })
+    }
+    render() {
+        return ( <div>
+ <h3 className = 'text-info' > Propostions </h3> <ul class = "list-group" > {
+                this.renderList()
+            } </ul>
+
+            </div>
+        )
+    }
 }

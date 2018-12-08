@@ -17,8 +17,7 @@ function authMiddleware(req, res, next) {
           message: "Failed to authenticate token."
         });
       req.user = decoded;
-      console.log("jwt")
-      console.log(decoded)
+  
 
       
       

@@ -52,15 +52,25 @@ onLogout = ()=>{
      
 
   
-      <li class="nav-item">
-      <a className=' m-2 p-2 btn  btn-outline-danger nav-link" href="#" '  onClick={this.onLogout}> Logout </a>
-      </li>
+   
       <li class="nav-item"
       
       >
                 <a  className=' m-2 p-2  btn btn-outline-warning nav-link" href="#"'  onClick={this.onEdit} >    Modifier Profile </a>
 
       </li>
+
+
+ <li class="nav-item">
+ <a  className=' m-2 p-2  btn btn-outline-warning nav-link" href="#"'  onClick={this.onEdit} >   Amis </a>
+
+ </li>
+
+    <li class="nav-item">
+      <a className=' m-2 p-2 btn  btn-outline-danger nav-link" href="#" '  onClick={this.onLogout}> Logout </a>
+      </li>
+      
+    
 
 
      
@@ -95,8 +105,17 @@ onLogout = ()=>{
 
    
 
+     <div className='row'>
+     <div className='col-md-9'>
     
-      <Friends />
+     </div>
+     <div className='col-md-3'>
+     <Friends />
+     </div>
+     </div>
+
+     
+     
 
 </div>
 
