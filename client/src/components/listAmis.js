@@ -35,9 +35,9 @@ export default class ListAmies extends Component {
             return ( <div className="card" >
           
             <div className="card-body">
-              <h5 className="card-title">{ami.login}</h5>
-              <p className="card-text">  {ami.age}....{ami.famille}</p>
-              <a className="btn btn-outline-danger">delete ami </a>
+              <h5 className="card-title  text-primaey ">{ami.login}</h5>
+              <p className="card-text">  {ami.age}  - {ami.famille}</p>
+              <a className="btn btn-outline-danger">  Delete  </a>
             </div>
             </div>
     
@@ -50,8 +50,13 @@ export default class ListAmies extends Component {
       <div>
 
 
- <h2 className='h1 text-muted'> List d'ami(e)s</h2>
-    {this.renderList()}
+ <h2 className=' text-muted'> List d'ami(e)s</h2>
+
+<div className='container'>
+
+ {this.renderList()}
+</div>
+   
 
 
         

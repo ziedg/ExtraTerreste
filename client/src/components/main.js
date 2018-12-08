@@ -48,7 +48,7 @@ class Main extends Component {
     const {login,password} = this.state;
 
     if( login ==='' | password===''){
-      this.setState({error:"Login or password shouldn't be empty ??"})
+        return this.setState({error:"Login or password shouldn't be empty ??"})
     }
 
      axios.post('http://localhost:4000/inscrire',{login,password
@@ -72,11 +72,20 @@ class Main extends Component {
   onLogin = ()=>{
 
     const {login,password} = this.state;
+    if( login ==='' | password===''){
+     return  this.setState({error:"Login or password shouldn't be empty ??"})
+    }
+
    
     axios.post('http://localhost:4000/login',{login,password}).then((res)=>{
       const {token} = res.data;
       localStorage.setItem('token',token);
       if(res.data){
+
+        console.log(res.data)
+        if(res.data.ko){
+          return  this.setState({error:"Inscriez vous ?? "})
+        }
         this.nextPath('/home')
       }
       else
