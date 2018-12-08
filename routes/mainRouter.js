@@ -27,11 +27,23 @@ module.exports = (app)=>{
 
 
 
-app.get('/getfriends',async (req,res)=>{
-    const user =  await  User.findOne({login:req.user.login})
+app.get('/getfriends',auth,async (req,res)=>{
 
+    const login = req.user.login;
 
-  console.log(user.friends);
+      const user = await User.findOne({login})
+
+     const users = await  Promise.all(user.friends.map( async login =>{
+            const u = await User.findOne({login});
+          return u;
+
+              
+
+       }))
+      console.log(users)
+
+      
+   
 
 })
 app.post('/addFriend',auth,async(req,res)=>{

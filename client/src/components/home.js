@@ -24,6 +24,10 @@ componentDidMount(){
     this.nextPath('/edit-profile')
   }
 
+  goListAmies= ()=>{
+    this.nextPath('/amis')
+  }
+
 
 onLogout = ()=>{
      localStorage.removeItem('token');
@@ -62,7 +66,7 @@ onLogout = ()=>{
 
 
  <li class="nav-item">
- <a  className=' m-2 p-2  btn btn-outline-warning nav-link" href="#"'  onClick={this.onEdit} >   Amis </a>
+ <a  className=' m-2 p-2  btn btn-outline-warning nav-link" href="#"'  onClick={this.goListAmies} >   Amis </a>
 
  </li>
 

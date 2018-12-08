@@ -9,6 +9,7 @@ import './App.css';
 
 import Home from './components/home';
 import EditProfile from './components/EditProfile';
+import ListAmies from './components/listAmis';
 
 
 
@@ -24,6 +25,7 @@ render() {
        <Route path='/'   exact component={Main} />
      <Route path='/home' component={Home} />
      <Route path='/edit-profile' component={EditProfile} />
+     <Route path='/amis' component={ListAmies} />
      </div>
      
    </Router>)
