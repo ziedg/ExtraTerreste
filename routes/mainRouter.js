@@ -95,6 +95,27 @@ module.exports = (app) => {
 
 
 
+    app.post('/deletefriend',auth,async (req,res)=>{
+      const {login} = req.body;
+        const user = await User.findOne({login:req.user.login});
+
+          let  friends = user.friends;
+          friends = friends.filter(f => f  !==login)
+
+          await User.update({
+            login: req.user.login
+        }, {
+        
+                friends
+            
+        });
+
+
+        res.send("user deleted");
+
+
+    })
+
 
     app.get('/users', auth, async (req, res) => {
 

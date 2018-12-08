@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import {Link} from'react-router-dom';
 
 import {
     withRouter
@@ -13,7 +14,8 @@ export default class ListAmies extends Component {
         amis:[]
     }
 
-    componentWillMount(){
+
+    loadFriends = ()=>{
         const token = localStorage.getItem('token');
         axios.get('http://localhost:4000/getfriends', {
             headers: {
@@ -26,18 +28,40 @@ export default class ListAmies extends Component {
         .catch(err =>{
             console.log("errr:",err);
         })
+    }
+    componentWillMount(){
+        this.loadFriends()
 
     }
 
 
+    deleteFriend = (login)=>{
+
+        const token = localStorage.getItem('token');
+        axios.post('http://localhost:4000/deletefriend',{login} ,{
+            headers: {
+                'x-access-token': token
+            }
+        }).then((res) => {
+        
+         this.loadFriends();
+        })
+        .catch(err =>{
+            console.log("errr:",err);
+        })
+
+
+
+    }
+
     renderList = ()=>{
         return this.state.amis.map((ami)=>{
-            return ( <div className="card" >
+            return ( <div className="card"   style={{width: "32rem"}} >
           
             <div className="card-body">
-              <h5 className="card-title  text-primaey ">{ami.login}</h5>
+              <h5 className="card-title  text-primary ">{ami.login}</h5>
               <p className="card-text">  {ami.age}  - {ami.famille}</p>
-              <a className="btn btn-outline-danger">  Delete  </a>
+              <a className="btn btn-outline-danger"   onClick={()=>this.deleteFriend(ami.login)}>  Delete  </a>
             </div>
             </div>
     
@@ -49,8 +73,8 @@ export default class ListAmies extends Component {
     return (
       <div>
 
-
- <h2 className=' text-muted'> List d'ami(e)s</h2>
+  <Link to={'/home'}>  Go Home </Link>
+ <h2 className=' text-muted'> List d'ami(e)s</h2> 
 
 <div className='container'>
 

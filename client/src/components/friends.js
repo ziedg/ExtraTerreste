@@ -124,7 +124,7 @@ export default class Friends extends Component {
 
                 </i>
 
-            Add </button>   </li>  })
+            Add  Friend </button>   </li>  })
     }
     render() {
         return ( <div>
