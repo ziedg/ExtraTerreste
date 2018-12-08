@@ -12,7 +12,8 @@ import axios from'axios';
   age:0,
   familly:'',
   race:'',
-  noriture:''
+  noriture:'',
+  file:null
 
   }
 
@@ -53,6 +54,9 @@ import axios from'axios';
 <div className='container'    style={{margin:100,padding:20}}   >
   <h1  className='text-muted'>   Editer votre Profil</h1>
 
+
+<div className='row'>
+<div className='col-md-8'>
 
   <input 
   value={this.state.login}
@@ -106,11 +110,32 @@ import axios from'axios';
       onChange={(e)=>{this.setState({noriture:e.target.value})}}
   className='form-control m-2 p-2 ' /> 
 
+  <input   className='form-control  '   onChange={(e)=> this.setState({file:URL.createObjectURL(e.target.files[0])}) } type='file' />
+
   
 
 
  <button className='btn btn-outline-success p-2 m-2'  onClick={this.handleChanges}> Edit </button>
  <button className='btn btn-outline-danger  p-2 m-2'  onClick={this.returnHome}> Cancel  </button>
+ 
+ 
+ </div>
+
+
+ <div className='col-md-4'>
+
+
+ <div class="card" style={{width: "18rem"}}>
+  <img class="card-img-top" src={this.state.file}  alt="choose an avatar" />
+  <div class="card-body">
+    <h5 class="card-title">{this.state.login}</h5>
+    <p class="card-text">   Famille :  {this.state.familly}  Age :   {this.state.age}</p>
+    <a href="#" className="btn btn-outline-primary">  save </a>
+  </div>
+
+ </div>
+ </div>
+ </div>
  </div>
       
 
