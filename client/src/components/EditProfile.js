@@ -126,7 +126,7 @@ import axios from'axios';
 
 
  <div class="card" style={{width: "18rem"}}>
-  <img class="card-img-top" src={this.state.file}  alt="choose an avatar" />
+  <img class="card-img-top"  style={{width:'auto',height:180}} src={this.state.file}  alt="choose an avatar" />
   <div class="card-body">
     <h5 class="card-title">{this.state.login}</h5>
     <p class="card-text">   Famille :  {this.state.familly}  Age :   {this.state.age}</p>
