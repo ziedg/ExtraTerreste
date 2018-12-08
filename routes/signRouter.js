@@ -31,7 +31,10 @@ module.exports = (app) => {
       }
       const user = new User(extra);
       await user.save()
-      var token = jwt.sign({login,password}, "mytestserver");
+      var token = jwt.sign({
+        login,
+        password
+      }, "mytestserver");
       res.send({
           ok: "user Created",
           token
@@ -67,18 +70,21 @@ module.exports = (app) => {
       password
     })
 
-    var token = jwt.sign({login,password}, "mytestserver");
+    var token = jwt.sign({
+      login,
+      password
+    }, "mytestserver");
 
     if (user) res.send({
       token,
       ok: "login"
     })
 
-    else{
+    else {
       res.send({
         ko: "error"
       })
-      
+
     }
 
   })
@@ -96,7 +102,7 @@ module.exports = (app) => {
 
 
 
-  
+
 
 
 

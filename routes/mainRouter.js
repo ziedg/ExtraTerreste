@@ -47,7 +47,7 @@ module.exports = (app) => {
             login
         })
 
-        
+
         const users = await Promise.all(user.friends.map(async login => {
             const u = await User.findOne({
                 login
@@ -59,7 +59,7 @@ module.exports = (app) => {
 
 
         }))
-    
+
         res.send(users)
 
 
@@ -98,17 +98,19 @@ module.exports = (app) => {
 
     app.get('/users', auth, async (req, res) => {
 
-      let   actualUser = req.user;
+        let actualUser = req.user;
 
         const users = await User.find({});
 
-    actualUser = await User.findOne({login:actualUser.login})
-        
+        actualUser = await User.findOne({
+            login: actualUser.login
+        })
 
 
 
 
-//filter the actaul user
+
+        //filter the actaul user
 
 
 
@@ -118,8 +120,8 @@ module.exports = (app) => {
                 login,
                 famille
             } = user;
-           
-                if (  user &&   user.login !== actualUser.login    &&   !actualUser.friends.includes(user.login) )
+
+            if (user && user.login !== actualUser.login && !actualUser.friends.includes(user.login))
 
                 return {
                     login,

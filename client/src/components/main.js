@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Background from '../assets/images.jpeg';
 
 import {withRouter} from 'react-router-dom';
 
@@ -96,7 +97,10 @@ class Main extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container"    style={{backgroundImage: `url(${Background})`,
+      backgroundRepeat: 'no-repeat',
+      borderRadius:18,
+      backgroundSize: '100% 100%'}}>
 
       <Inscrire 
       onSubmit={this.onSubmit}
