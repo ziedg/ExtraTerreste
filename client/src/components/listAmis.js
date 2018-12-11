@@ -59,7 +59,7 @@ export default class ListAmies extends Component {
             return ( 
     
                 <div className="card  col-md-4 p-2" style={{width: "18rem" }}>
-  <img  style={{width:'auto',height:180}}  className="card-img-top" src={ami.imageUrl} alt="Card image cap" />
+  <img  style={{width:'auto',height:180}}  className="card-img-top" src={ami.imageUrl} alt="" />
   <div className="card-body">
     <h3 className="card-text text-success">  Name : {ami.login}</h3>
     

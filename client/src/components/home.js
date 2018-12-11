@@ -5,7 +5,9 @@ import EditProfile from './EditProfile';
 class Home extends Component {
 
 
-  state={user:{}
+  state={
+    imageUrl:'',
+    login:''
 
 
   }
@@ -18,12 +20,13 @@ class Home extends Component {
  
 
 
-  const user =  await localStorage.getItem('user');
+  const user =  await  JSON.parse(localStorage.getItem('user'));
   if(user){
     console.log(user)
+         this.setState({imageUrl:user.imageUrl,login:user.login})
   }
 
-   // this.setState({user,login:user.login,age:user.age,familly:user.famille,password:user.password})
+   
   
 
 
@@ -56,7 +59,7 @@ onLogout = ()=>{
   
   <a class="navbar-brand" href="#">
   
-  <img src= {require("../assets/images.jpeg")}  style={{width:30,height:30}} className="rounded" alt="n"/>  Welcome   { this.state.user.login} 
+  <img src= {this.state.imageUrl}  style={{width:30,height:30}} className="rounded"  alt=''/>  Welcome   { this.state.login} 
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>

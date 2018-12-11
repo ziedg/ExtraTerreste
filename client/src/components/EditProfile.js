@@ -63,7 +63,7 @@ import axios from'axios';
 
     axios.post('http://localhost:4000/edit',this.state,{headers:{'x-access-token':token}}).then((res)=>{
         console.log(res.data);
-        localStorage.setItem('user',JSON.stringify(this.state))
+        localStorage.setItem('user',JSON.stringify(res.data.user))
       
     })
   }
@@ -159,7 +159,7 @@ import axios from'axios';
 
 
  <div class="card" style={{width: "18rem"}}>
-  <img class="card-img-top"  style={{width:'auto',height:180}} src={ this.state.file}  alt="choose an avatar" />
+  <img class="card-img-top"  style={{width:'auto',height:180}} src={ this.state.file}  alt="" />
   <div class="card-body">
     <h5 class="card-title">{this.state.login}</h5>
     <p class="card-text">   Famille :  {this.state.familly}  Age :   {this.state.age}</p>

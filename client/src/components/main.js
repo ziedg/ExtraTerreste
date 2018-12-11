@@ -19,9 +19,21 @@ class Main extends Component {
     famille:'',
     race:'',
     norriture:'',
+    friends:'',
+    imageUrl:null,
     error:''
 
   }
+
+componentDidMount(){
+
+    const token = localStorage.getItem('token')
+    if(token){
+      this.nextPath('/home')
+    }
+
+
+}
 
   nextPath(path) {
     this.props.history.push(path);
@@ -55,7 +67,11 @@ class Main extends Component {
 
      }).then((res)=>{
 
-
+   
+    
+   
+     
+      
       const {token} = res.data;
       if(res.data.ko){
          return  this.setState({error:"compte Deja existe ?? "})
@@ -85,9 +101,11 @@ class Main extends Component {
       localStorage.setItem('token',token);
       if(res.data){
 
-        console.log(res.data)
+       const {user}= res.data;
+       this.setState({imageUrl:user.imageUrl});
+      
         if(res.data.ko){
-          return  this.setState({error:"Inscriez vous ?? "})
+          return  this.setState({error:"Login or password Incorrect ?? "})
         }
 
         Promise.resolve( localStorage.setItem('user',JSON.stringify(this.state)) ).then(()=>{

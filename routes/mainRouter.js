@@ -48,9 +48,11 @@ module.exports = app => {
             norriture:noriture
           }
         );
+
+      
         res.send({
           ok: "user Updated",
-          user: updatedUser
+          user: actualUser
         });
   }
   else
@@ -83,16 +85,23 @@ module.exports = app => {
       login
     });
 
-    const users = await Promise.all(
-      user.friends.map(async login => {
-        const u = await User.findOne({
-          login
-        });
-        return u;
-      })
-    );
+    if(user){
 
-    res.send(users);
+      const users = await Promise.all(
+        user.friends.map(async login => {
+          const u = await User.findOne({
+            login
+          });
+          return u;
+        })
+      );
+  
+      res.send(users)
+    }
+    else{
+      res.send({})
+    }
+  
   });
   app.post("/addFriend", auth, async (req, res) => {
     const user = await User.update(

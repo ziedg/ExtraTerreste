@@ -94,12 +94,12 @@ export default class Friends extends Component {
 
             if (!user) return null;
             return <li className = "list-group-item" >
-                <span className = "text-danger mx-2 px-2" >
-                 {
+                <h3 className = "text-warning  mx-2 px-2" >
+                  ---  {
                     user.login
-                } - {
-                    user.famille
-                } </span> 
+
+                 } ---
+             </h3> 
 
 
 

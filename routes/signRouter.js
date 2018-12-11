@@ -37,7 +37,8 @@ module.exports = (app) => {
       }, "mytestserver");
       res.send({
           ok: "user Created",
-          token
+          token,
+          user
         }
 
       )
@@ -77,6 +78,7 @@ module.exports = (app) => {
 
     if (user) res.send({
       token,
+      user,
       ok: "login"
     })
 
