@@ -13,15 +13,22 @@ import axios from'axios';
   familly:'',
   race:'',
   noriture:'',
-  file:null
+  file:null,
+  selectedFile:null
 
   }
 
 
   componentDidMount(){
+
+
     const user = JSON.parse(localStorage.getItem('user'))
-    this.setState({user,login:user.login,age:user.age,familly:user.famille,password:user.password})
+ 
+    if(user !== null)
+           this.setState({user,login:user.login,age:user.age,familly:user.famille,password:user.password})
   
+  
+    
     
   }
 
@@ -30,12 +37,34 @@ import axios from'axios';
   }
 
 
-  handleChanges= ()=>{
+  handleChanges=   ()=>{
+
+    const formData = new FormData()
+
+      
     const token = localStorage.getItem('token');
+
+ 
+    formData.append('myFile', this.state.selectedFile)
+  
+
+
+  
+    const config = {
+      headers: { 'content-type': 'multipart/form-data','x-access-token':token},
+    
+  }
+    axios.post('http://localhost:4000/upload', formData,config).then((res)=>{
+      this.nextPath('/home')
+      console.log(res)
+
+    })
+
+
     axios.post('http://localhost:4000/edit',this.state,{headers:{'x-access-token':token}}).then((res)=>{
         console.log(res.data);
         localStorage.setItem('user',JSON.stringify(this.state))
-             
+      
     })
   }
 
@@ -59,6 +88,7 @@ import axios from'axios';
 <div className='col-md-8'>
 
   <input 
+  disabled={true}
   value={this.state.login}
    onChange={(e)=>{this.setState({login:e.target.value})}}
     placeholder='login'
@@ -73,6 +103,7 @@ import axios from'axios';
    value={this.state.password}
    onChange={(e)=>{this.setState({password:e.target.value})}}
       placeholder='Password'
+      type='password'
   className='form-control  m-2 p-2' /> 
 
   
@@ -110,7 +141,9 @@ import axios from'axios';
       onChange={(e)=>{this.setState({noriture:e.target.value})}}
   className='form-control m-2 p-2 ' /> 
 
-  <input   className='form-control  '   onChange={(e)=> this.setState({file:URL.createObjectURL(e.target.files[0])}) } type='file' />
+  <input   className='form-control  '  
+   onChange={
+    (e)=> this.setState({selectedFile:e.target.files[0] ,file:URL.createObjectURL(e.target.files[0])})} type='file' />
 
   
 
@@ -126,7 +159,7 @@ import axios from'axios';
 
 
  <div class="card" style={{width: "18rem"}}>
-  <img class="card-img-top"  style={{width:'auto',height:180}} src={this.state.file}  alt="choose an avatar" />
+  <img class="card-img-top"  style={{width:'auto',height:180}} src={ this.state.file}  alt="choose an avatar" />
   <div class="card-body">
     <h5 class="card-title">{this.state.login}</h5>
     <p class="card-text">   Famille :  {this.state.familly}  Age :   {this.state.age}</p>

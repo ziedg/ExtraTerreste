@@ -13,10 +13,21 @@ class Home extends Component {
   nextPath(path) {
     this.props.history.push(path);
   }
-componentDidMount(){
-  const user = JSON.parse(localStorage.getItem('user'))
-  this.setState({user,login:user.login,age:user.age,familly:user.famille,password:user.password})
+ async componentDidMount(){
 
+ 
+
+
+  const user =  await localStorage.getItem('user');
+  if(user){
+    console.log(user)
+  }
+
+   // this.setState({user,login:user.login,age:user.age,familly:user.famille,password:user.password})
+  
+
+
+        
   
 }
 
@@ -31,6 +42,7 @@ componentDidMount(){
 
 onLogout = ()=>{
      localStorage.removeItem('token');
+     localStorage.removeItem('user');
      this.nextPath('/');
      
 }

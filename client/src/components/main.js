@@ -63,10 +63,13 @@ class Main extends Component {
   
       localStorage.setItem('token',token);
 
-     localStorage.setItem('user',JSON.stringify(this.state))
-   this.nextPath('/home')
-     })
-  }
+        Promise.resolve( localStorage.setItem('user',JSON.stringify(this.state)) ).then(()=>{
+          this.nextPath('/home')
+        })
+
+ 
+     
+  })}
 
 
   onLogin = ()=>{
@@ -86,7 +89,11 @@ class Main extends Component {
         if(res.data.ko){
           return  this.setState({error:"Inscriez vous ?? "})
         }
-        this.nextPath('/home')
+
+        Promise.resolve( localStorage.setItem('user',JSON.stringify(this.state)) ).then(()=>{
+          this.nextPath('/home')
+        })
+     
       }
       else
       {

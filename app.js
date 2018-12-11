@@ -5,16 +5,21 @@ const jwt = require('jsonwebtoken');
 const exjwt = require('express-jwt');
 const mongoose = require('mongoose');
 
+const User = require('./models/user');
+
+
+
+
 
 
 
 mongoose.connect('mongodb://localhost:27017/db')
-  .then(()=>{
-      console.log-("user Connected .")
-  })
-  .catch((err)=>{
-      console.log('failed to connect due To :',err)
-  })
+    .then(() => {
+        console.log - ("user Connected .")
+    })
+    .catch((err) => {
+        console.log('failed to connect due To :', err)
+    })
 
 const PORT = 4000 | process.env.PORT;
 
@@ -31,7 +36,7 @@ app.use(bodyParser.json());
 
 
 //cors
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.setHeader('Access-Control-Allow-Headers', 'Content-type, x-access-token');
     next();
@@ -44,15 +49,6 @@ app.use((req,res,next)=>{
 require('./routes/signRouter')(app);
 require('./routes/mainRouter')(app);
 
-
-
-
-
-
-
-
-app.listen(PORT, ()=>{
+app.listen(PORT, () => {
     console.log(`server is up  at port ${PORT}`)
 })
-
-

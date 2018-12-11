@@ -1,156 +1,187 @@
-const auth = require('./authMiddleware');
+const auth = require("./authMiddleware");
 
-const User = require('../models/user');
+const User = require("../models/user");
 
-module.exports = (app) => {
+//require and confguire multer
+var multer = require('multer')
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, req.user.login + '-' + Date.now())
+    }
+})
+
+var upload = multer({
+    storage: storage
+})
 
 
 
 
-    app.post('/edit', auth, async (req, res) => {
-        const user = req.user;
-        const {
-            login,
-            password,
-            famille,
-            race,
-            age,
-            noriture
-        } = req.body;
+module.exports = app => {
 
-        const updatedUser = await User.update({
+  //edit the extraTerresetre profile
+  app.post("/edit", auth, async (req, res) => {
+
+    //varibles and consts declartion 
+    const user = req.user;
+     let updatedUser= null
+    const { login, password, familly, race, age,noriture } = req.body;
+
+ try{
+
+  const  actualUser =  await User.findOne({login});
+  if( actualUser || user.login !==  login){
+       updatedUser = await User.update(
+          {
             login: user.login
-        }, {
+          },
+          {
             login,
             password,
-            famille,
+            famille:familly,
             race,
             age,
-            noriture
-
-        })
-
+            norriture:noriture
+          }
+        );
         res.send({
-            'ok': 'user Updated',
-            user: updatedUser
-        })
-
-    })
-
-
-
-    app.get('/getfriends', auth, async (req, res) => {
-
-        const login = req.user.login;
-
-        const user = await User.findOne({
-            login
-        })
-
-
-        const users = await Promise.all(user.friends.map(async login => {
-            const u = await User.findOne({
-                login
-            });
-            return u;
-
-
-
-
-
-        }))
-
-        res.send(users)
-
-
-
-
-    })
-    app.post('/addFriend', auth, async (req, res) => {
-
-
-
-
-
-
-
-
-        const user = await User.update({
-            login: req.user.login
-        }, {
-            $push: {
-                friends: req.body.login
-            }
+          ok: "user Updated",
+          user: updatedUser
         });
-
-
-
-
-        res.send('friend added!');
-
-
-    })
-
-
-
-
-
-    app.post('/deletefriend',auth,async (req,res)=>{
-      const {login} = req.body;
-        const user = await User.findOne({login:req.user.login});
-
-          let  friends = user.friends;
-          friends = friends.filter(f => f  !==login)
-
-          await User.update({
-            login: req.user.login
-        }, {
-        
-                friends
-            
+  }
+  else
+  {
+      res.send({
+          ko: "user already exist",
         });
+   
+ }}
+
+ catch(e){
+  res.send({
+    error:e,
+    ko: "user already exist",
+  });
+ }
+ 
+
+  
+
+  
+
+   
+  });
+
+  app.get("/getfriends", auth, async (req, res) => {
+    const login = req.user.login;
+
+    const user = await User.findOne({
+      login
+    });
+
+    const users = await Promise.all(
+      user.friends.map(async login => {
+        const u = await User.findOne({
+          login
+        });
+        return u;
+      })
+    );
+
+    res.send(users);
+  });
+  app.post("/addFriend", auth, async (req, res) => {
+    const user = await User.update(
+      {
+        login: req.user.login
+      },
+      {
+        $push: {
+          friends: req.body.login
+        }
+      }
+    );
+
+    res.send("friend added!");
+  });
+
+  app.post("/deletefriend", auth, async (req, res) => {
+    const { login } = req.body;
+    const user = await User.findOne({ login: req.user.login });
+
+    let friends = user.friends;
+    friends = friends.filter(f => f !== login);
+
+    await User.update(
+      {
+        login: req.user.login
+      },
+      {
+        friends
+      }
+    );
+
+    res.send("user deleted");
+  });
+
+  app.get("/users", auth, async (req, res) => {
+    let actualUser = req.user;
+
+    const users = await User.find({});
+
+    actualUser = await User.findOne({
+      login: actualUser.login
+    });
+
+    //filter the actaul user
+
+    const newusers = users.map(user => {
+      const { login, famille } = user;
+
+      if (
+        user &&
+        actualUser &&
+        user.login !== actualUser.login &&
+        !actualUser.friends.includes(user.login)
+      )
+        return {
+          login,
+          famille
+        };
+    });
+
+    res.send(newusers);
+  });
 
 
-        res.send("user deleted");
 
+  app.post('/upload', auth, upload.single('myFile'), async (req, res) => {
 
+    const user = await User.findOne({
+        login: req.user.login
     })
 
+    if (user && req.file) {
+        user.imageUrl = `http://localhost:4000/uploads/${req.file.filename}`;
+        await user.save()
 
-    app.get('/users', auth, async (req, res) => {
-
-        let actualUser = req.user;
-
-        const users = await User.find({});
-
-        actualUser = await User.findOne({
-            login: actualUser.login
-        })
+    }
 
 
 
 
 
-        //filter the actaul user
+
+    res.send({
+        ok: "true"
+    });
+
+})
 
 
+};
 
-
-        const newusers = users.map((user => {
-            const {
-                login,
-                famille
-            } = user;
-
-            if (user && user.login !== actualUser.login && !actualUser.friends.includes(user.login))
-
-                return {
-                    login,
-                    famille
-                }
-        }))
-
-        res.send(newusers);
-    })
-
-}

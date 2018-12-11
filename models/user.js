@@ -11,6 +11,7 @@ const UserSchema= new Schema({
     race:String,
     norriture:String,
     friends : [],
+    imageUrl:String
 })
 
 
