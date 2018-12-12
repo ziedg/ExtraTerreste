@@ -98,11 +98,19 @@ export default class Friends extends Component {
            
             }}
             className = "list-group-item m-1 " >
-                <h4 className = "text-warning  mx-2 px-2" >
-                    **  {
+                <h4 
+                style={{
+                    textAlign: 'left',
+                    textTransform: 'uppercase',
+                    letterSpacing: 2,
+                    textShadow: '3px 2px red',
+                    lineHeight: 1.8
+                }}
+                className = "text-warning  mx-2 px-2" >
+                     {
                     user.login
 
-                 }  **
+                 }  
              </h4> 
 
 
