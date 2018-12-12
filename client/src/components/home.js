@@ -75,18 +75,26 @@ onLogout = ()=>{
       <li class="nav-item"
       
       >
-                <a  className=' m-2 p-2  btn btn-outline-warning nav-link" href="#"'  onClick={this.onEdit} >    Modifier Profile </a>
+                <a  className=' m-2 p-2  btn btn-warning nav-link" href="#"'  
+                
+                style={{ boxShadow: `4px 6px 4px gray`}}
+                
+                onClick={this.onEdit} >    Modifier Profile </a>
 
       </li>
 
 
  <li class="nav-item">
- <a  className=' m-2 p-2  btn btn-outline-warning nav-link" href="#"'  onClick={this.goListAmies} >   Amis </a>
+ <a  className=' m-2 p-2  btn btn-warning nav-link" href="#"'  
+ style={{ boxShadow: `4px 6px 4px gray`}}
+ onClick={this.goListAmies} >   Amis </a>
 
  </li>
 
     <li class="nav-item">
-      <a className=' m-2 p-2 btn  btn-outline-danger nav-link" href="#" '  onClick={this.onLogout}> Logout </a>
+      <a className=' m-2 p-2 btn  btn-danger nav-link" href="#" ' 
+      style={{ boxShadow: `4px 6px 4px gray`}}
+      onClick={this.onLogout}> Logout </a>
       </li>
       
     

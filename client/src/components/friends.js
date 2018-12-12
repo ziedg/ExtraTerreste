@@ -95,7 +95,7 @@ export default class Friends extends Component {
             if (!user) return null;
             return <li 
             style={{borderRadius:10,
-                boxShadow: `2px 3px 2px gray`
+           
             }}
             className = "list-group-item m-1 " >
                 <h4 className = "text-warning  mx-2 px-2" >
@@ -108,7 +108,8 @@ export default class Friends extends Component {
 
 
 
-                <button className = 'btn btn-outline-info'
+                <button className = 'btn btn-info'
+                style={{ boxShadow: `4px 6px 4px gray`}}
             onClick = {
                     (e) => this.handlefriend(e, user)
                 } >
@@ -134,7 +135,7 @@ export default class Friends extends Component {
         return ( <div>
  <h1 className = 'text-info' > Propostions </h1>
  
-  <ul   style={{margin:15}}class = "list-group" > {
+  <ul   style={{margin:15 ,padding:8, }}class = "list-group" > {
                 this.renderList()
             } </ul>
 

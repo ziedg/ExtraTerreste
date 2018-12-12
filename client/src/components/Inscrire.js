@@ -15,12 +15,21 @@ export default (props) => {
 
        
        <input type="checkbox" checked data-toggle="toggle" />    let me connected .<br></br>
-      <button className="btn-outline-primary btn "   onClick= {props.onSubmit} > Inscrire</button>
+      <button
+      
+      style={{
+        boxShadow: `2px 2px 2px gray`
+       }}
+      className="btn-primary btn "   onClick= {props.onSubmit} > Inscrire</button>
 
       <span className='text-muted' >  ...Or...  </span>
 
 
-      <button className='btn btn-outline-success '  onClick={props.onLogin}  >  Login </button>
+      <button
+      style={{
+        boxShadow: `2px 2px 2px gray`
+       }}
+      className='btn btn-success '  onClick={props.onLogin}  >  Login </button>
 
       {props.error!==''?<div className="alert alert-danger m-3 p-3" > {props.error} </div>:null}
     </React.Fragment>

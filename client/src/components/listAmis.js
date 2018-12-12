@@ -66,7 +66,12 @@ export default class ListAmies extends Component {
     <h3 className="card-text text-success">  Name : {ami.login}</h3>
     
 <h3 className="card-text text-success">   Age : {ami.age} </h3>
-  <button className='btn btn-outline-danger'  onClick={()=> this.deleteFriend(ami.login)}>  Delete </button>
+  <button
+  
+  style={{
+    boxShadow: `4px 6px 4px gray`
+   }}
+  className='btn btn-danger'  onClick={()=> this.deleteFriend(ami.login)}>  Delete </button>
   </div>
 
 </div>

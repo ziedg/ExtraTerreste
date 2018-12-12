@@ -149,8 +149,17 @@ import axios from'axios';
   
 
 
- <button className='btn btn-outline-success p-2 m-2'  onClick={this.handleChanges}> Edit </button>
- <button className='btn btn-outline-danger  p-2 m-2'  onClick={this.returnHome}> Cancel  </button>
+ <button 
+ style={{
+  boxShadow: `2px 4px 2px gray`
+ }}
+ className='btn btn-success p-2 m-2'  onClick={this.handleChanges}> Edit </button>
+ <button
+ 
+ style={{
+  boxShadow: `2px 4px 2px gray`
+ }}
+ className='btn btn-danger  p-2 m-2'  onClick={this.returnHome}> Cancel  </button>
  
  
  </div>
