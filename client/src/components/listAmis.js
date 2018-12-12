@@ -78,7 +78,12 @@ export default class ListAmies extends Component {
     return (
       <div>
 
-  <Link to={'/home'}>  <i class="fa fa-hand-o-left text-primary fa-2x m-2   " aria-hidden="true"></i> </Link>
+  <Link to={'/home'}>
+  
+  <i class="fa fa-angle-left  fa-lg text-success "  style={{padding:15}} aria-hidden="true"   > Home </i>
+
+
+ </Link>
 
   <div className='container'>
  <h2 className=' text-muted'> List d'ami(e)s</h2> 

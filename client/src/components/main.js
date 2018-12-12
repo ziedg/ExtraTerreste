@@ -139,11 +139,13 @@ componentDidMount(){
       <div className="container"  
         style={{
       margin:100,
+      
     
       borderWidth:2,
     
       borderColor:'#eee',
       borderStyle:'solid',
+      boxShadow: `7px 7px 7px gray`,
   
       padding:60,
       borderRadius:15,

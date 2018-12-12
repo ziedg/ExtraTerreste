@@ -178,6 +178,10 @@ module.exports = app => {
         user.imageUrl = `http://localhost:4000/uploads/${req.file.filename}`;
         await user.save()
 
+        res.send({
+          ok: "true"
+      });
+
     }
 
 
@@ -185,9 +189,7 @@ module.exports = app => {
 
 
 
-    res.send({
-        ok: "true"
-    });
+ 
 
 })
 
