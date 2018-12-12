@@ -4,9 +4,9 @@ import React from 'react'
 
 export default (props) => {
   return (
-    <div className="container m-5 p-5"
-  >
+    
 
+<React.Fragment>
      <h1  className="  text-primary ">  Inscrivez vous  </h1>
       <input   onChange={props.onLoginChange}   placeholder='Login  (*)' className='form-control p-2 m-2' /> 
       <input    onChange={props.onPasswordChange}   placeholder='password  (*)'  type='password' 
@@ -23,6 +23,7 @@ export default (props) => {
       <button className='btn btn-outline-success '  onClick={props.onLogin}  >  Login </button>
 
       {props.error!==''?<div className="alert alert-danger m-3 p-3" > {props.error} </div>:null}
-    </div>
+    </React.Fragment>
+  
   )
 }

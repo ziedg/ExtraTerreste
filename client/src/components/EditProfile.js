@@ -141,7 +141,8 @@ import axios from'axios';
       onChange={(e)=>{this.setState({noriture:e.target.value})}}
   className='form-control m-2 p-2 ' /> 
 
-  <input   className='form-control  '  
+  <input   className='form-control-file   m-2 p-2 '  
+  
    onChange={
     (e)=> this.setState({selectedFile:e.target.files[0] ,file:URL.createObjectURL(e.target.files[0])})} type='file' />
 
@@ -158,7 +159,9 @@ import axios from'axios';
  <div className='col-md-4'>
 
 
- <div class="card" style={{width: "18rem"}}>
+ <div class="card" style={{
+      boxShadow: `4px 6px 4px gray`,
+   width: "18rem"}}>
   <img class="card-img-top"  style={{width:'auto',height:180}} src={ this.state.file}  alt="" />
   <div class="card-body">
     <h5 class="card-title">{this.state.login}</h5>

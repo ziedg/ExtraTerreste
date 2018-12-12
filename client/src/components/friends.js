@@ -93,13 +93,17 @@ export default class Friends extends Component {
         return this.state.users.map((user) => {
 
             if (!user) return null;
-            return <li className = "list-group-item" >
-                <h3 className = "text-warning  mx-2 px-2" >
-                  ---  {
+            return <li 
+            style={{borderRadius:10,
+                boxShadow: `2px 3px 2px gray`
+            }}
+            className = "list-group-item m-1 " >
+                <h4 className = "text-warning  mx-2 px-2" >
+                    **  {
                     user.login
 
-                 } ---
-             </h3> 
+                 }  **
+             </h4> 
 
 
 
@@ -128,7 +132,9 @@ export default class Friends extends Component {
     }
     render() {
         return ( <div>
- <h3 className = 'text-info' > Propostions </h3> <ul class = "list-group" > {
+ <h1 className = 'text-info' > Propostions </h1>
+ 
+  <ul   style={{margin:15}}class = "list-group" > {
                 this.renderList()
             } </ul>
 

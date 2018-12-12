@@ -58,7 +58,9 @@ export default class ListAmies extends Component {
         return this.state.amis.map((ami)=>{
             return ( 
     
-                <div className="card  col-md-4 p-2" style={{width: "18rem" }}>
+                <div className="card  col-md-3 p-2" style={{
+                    boxShadow: `3px 5px 3px gray`,
+                    width: "18rem",margin:4,borderRadius:6 }}>
   <img  style={{width:'auto',height:180}}  className="card-img-top" src={ami.imageUrl} alt="" />
   <div className="card-body">
     <h3 className="card-text text-success">  Name : {ami.login}</h3>
@@ -81,7 +83,7 @@ export default class ListAmies extends Component {
   <div className='container'>
  <h2 className=' text-muted'> List d'ami(e)s</h2> 
 
-<div className='container  row '>
+<div className='row '>
 
  {this.renderList()}
 

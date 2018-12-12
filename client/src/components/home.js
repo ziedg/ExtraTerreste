@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom';
 import Friends from './friends';
-import EditProfile from './EditProfile';
+
 class Home extends Component {
 
 
@@ -51,11 +51,11 @@ onLogout = ()=>{
 }
   render() {
     return (
-      <div>
+      <div >
 
 
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-inverse  bg-success ">
   
   <a class="navbar-brand" href="#">
   

@@ -136,10 +136,18 @@ componentDidMount(){
 
   render() {
     return (
-      <div className="container"    style={{backgroundImage: `url(${Background})`,
-      backgroundRepeat: 'no-repeat',
-      borderRadius:18,
-      backgroundSize: '100% 100%'}}>
+      <div className="container"  
+        style={{
+      margin:100,
+    
+      borderWidth:2,
+    
+      borderColor:'#eee',
+      borderStyle:'solid',
+  
+      padding:60,
+      borderRadius:15,
+    }}>
 
       <Inscrire 
       onSubmit={this.onSubmit}
